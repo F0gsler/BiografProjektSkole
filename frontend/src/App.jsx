@@ -14,11 +14,11 @@ function App() {
 
   return (
     <div className="HeaderBar">
-      <div>
+      <div className="HeaderLeft">
         <h1 id="header">Marius Biograf</h1>
       </div>
-      <div>
-        
+      <div className="HeaderRight">
+        <button id="headerButton">Login</button>
       </div>
 
     </div>
