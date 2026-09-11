@@ -1,0 +1,9 @@
+.HeaderBar {
+    border-bottom: 2px solid black;
+    margin-left: -5px;
+}
+#header {
+    font-size: 35px;
+    color: black;
+    font-weight: bold;
+}

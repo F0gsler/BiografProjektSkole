@@ -1,4 +1,5 @@
 // import { useEffect, useState } from 'react'
+import './App.css'
 
 function App() {
   // const [drivers, setDrivers] = useState([])
@@ -12,7 +13,13 @@ function App() {
 
 
   return (
-    <div>
+    <div className="HeaderBar">
+      <div>
+        <h1 id="header">Marius Biograf</h1>
+      </div>
+      <div>
+        
+      </div>
 
     </div>
   )
