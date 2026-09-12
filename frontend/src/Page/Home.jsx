@@ -13,7 +13,6 @@ export default function Home() {
           </div>
           <div className="CommonHeaderRight">
               <button id="CommonButton" onClick={() => navigate('/program')}>Program</button>
-              <button id="CommonButton" onClick={() => navigate('/priser')}>Priser</button>
               <button id="CommonButton" onClick={() => navigate('/about')}>Om Biografen</button>
               <button id="CommonButton" onClick={() => navigate('/login')}>Login</button>
           </div>

@@ -2,7 +2,7 @@ import '../App.css'
 import { useNavigate } from 'react-router-dom'
 
 
-export default function Price() {
+export default function Payment() {
   const navigate = useNavigate()
 
   return (
@@ -12,7 +12,6 @@ export default function Price() {
       </div>
       <div className="CommonHeaderRight">
         <button id="CommonButton" onClick={() => navigate('/program')}>Program</button>
-        <button id="CommonButton" onClick={() => navigate('/priser')}>Priser</button>
         <button id="CommonButton" onClick={() => navigate('/about')}>Om Biografen</button>
         <button id="CommonButton" onClick={() => navigate('/login')}>Login</button>
       </div>
