@@ -1,30 +1,22 @@
-// import { useEffect, useState } from 'react'
 import './App.css'
+import { Route, Routes } from 'react-router-dom'
+import Program from './Page/program.jsx'
+import Price from './Page/price.jsx'
+import About from './Page/About.jsx'
+import Login from './Page/Login.jsx'
+import Error from './Page/404ErrorPage.jsx'
+import Home from './Page/Home.jsx'
 
 function App() {
-  // const [drivers, setDrivers] = useState([])
-
-  // useEffect(() => {
-  //   fetch('https://api.openf1.org/v1/drivers')
-  //     .then(res => res.json())
-  //     .then(setDrivers)
-  //     .catch(console.error)
-  // }, [])
-
-
   return (
-    <div className="HeaderBar">
-      <div className="HeaderLeft">
-        <h1 id="header">Marius Biograf</h1>
-      </div>
-      <div className="HeaderRight">
-        <button id="headerButton">Program</button>
-        <button id="headerButton">Priser</button>
-        <button id="headerButton">Om Biografen</button>
-        <button id="headerButton">Login</button>
-      </div>
-
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/program" element={<Program />} />
+      <Route path="/priser" element={<Price />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="*" element={<Error />} />
+    </Routes>
   )
 }
 

@@ -1,4 +1,6 @@
-.HeaderBar {
+/* CSS for Header baren som bruges på alle sider  */
+
+.CommonHeaderBar {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -7,29 +9,86 @@
     padding: 10px 10px 0;
 }
 
-#header {
+#CommonheaderText {
     font-size: 35px;
     color: black;
-    font-weight: bold;
     margin: 0;
+    font-family: Rockwell Extra ,Rockwell , monospace; 
 }
 
-.HeaderLeft {
+.CommonHeaderLeft {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     margin-left: 10px;
 }
 
-.HeaderRight {
+.CommonHeaderRight {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     margin-right: 10px;
 }
 
-#headerButton {
-    padding: 8px 16px;
-    font-size: 16px;
-    cursor: pointer;
+#CommonButton {
+appearance: none;
+  background-color: #fafbfc;
+  border: 2px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow:
+rgba(27, 31, 35, 0.04) 0 1px 0,
+rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292e;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 6px 16px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+  margin-right: 10px;
+  margin-left: 10px;
+  font-weight: bold;
+
+}
+
+#CommonButton:hover {
+    background-color: #d3d5d6;
+}
+
+
+/* CSS for Error page  */
+
+#errorHeader {
+    font-size: 50px;
+    color: black;
+    margin: 0;
+    font-family: Rockwell Extra ,Rockwell , monospace; 
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+.ErrorPage {
+    text-align: center;
+    margin-top: 50px;
+    font-family: Rockwell Extra ,Rockwell , monospace; 
+    justify-content: center;
+}
+
+
+/* CSS for home page  */
+
+.HomeContent {
+    text-align: center;
+    margin-top: 100px;
+    font-family: Rockwell Extra ,Rockwell , monospace; 
 }
