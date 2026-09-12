@@ -18,6 +18,9 @@ function App() {
         <h1 id="header">Marius Biograf</h1>
       </div>
       <div className="HeaderRight">
+        <button id="headerButton">Program</button>
+        <button id="headerButton">Priser</button>
+        <button id="headerButton">Om Biografen</button>
         <button id="headerButton">Login</button>
       </div>
 
