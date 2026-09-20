@@ -1,15 +1,15 @@
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
+// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/getMovies': {
-        target: 'https://localhost:7123',
+      '/api': {
+        target: 'http://localhost:5212',  
         changeOrigin: true,
-        secure: false
-      }
-    }
-  }
+      },
+    },
+  },
 })

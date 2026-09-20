@@ -6,6 +6,7 @@ import About from './Page/About.jsx'
 import Login from './Page/Login.jsx'
 import Error from './Page/404ErrorPage.jsx'
 import Home from './Page/Home.jsx'
+import Admin from './Page/AdminPage.jsx'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/about" element={<About />} />
       <Route path="/login" element={<Login />} />
       <Route path="*" element={<Error />} />
+      <Route path="/admin" element={<Admin />} />
     </Routes>
   )
 }
