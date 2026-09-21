@@ -10,6 +10,12 @@ export default function Program() {
     { tid: '20:00', movies: ['Johnny English: Last Misson'] },
     { tid: '22:00', movies: ['Mission Impossible: The Last Mission'] },
   ]
+  GetMoviesCatalog
+     useEffect(() => {
+      fetch(`/api/Movies/GetMoviesCatalog`)
+      .then(response => response.json())
+      .then(data => setMovies(data.message))
+    },[])
 
   return (
     <>
