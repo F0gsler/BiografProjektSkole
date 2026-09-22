@@ -1,50 +1,42 @@
 import '../App.css'
 import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import Navbar from '../Components/Navbar'
 
 
 export default function Program() {
+
   const navigate = useNavigate()
-  const programList = [
-    { tid: '16:30', movies: ['Avengers DoomsDay'] },
-    { tid: '18:00', movies: ['Star Wars: Vaders Return'] },
-    { tid: '20:00', movies: ['Johnny English: Last Misson'] },
-    { tid: '22:00', movies: ['Mission Impossible: The Last Mission'] },
-  ]
-  GetMoviesCatalog
-     useEffect(() => {
-      fetch(`/api/Movies/GetMoviesCatalog`)
-      .then(response => response.json())
-      .then(data => setMovies(data.message))
-    },[])
+  const [moviesData, setMoviesData] = useState([]);
+
+ useEffect(() => {
+  const getData = async () => {
+  const response = await fetch('/api/Movie/GetAllMovies');
+  const data = await response.json();
+  console.log(data);
+  setMoviesData(Array.isArray(data) ? data : []);
+};
+
+    getData();
+}, []);
 
   return (
     <>
-    <div className="CommonHeaderBar">
-      <div className="CommonHeaderLeft">
-        <h1 id="CommonheaderText">Marius Bio</h1>
-      </div>
-      <div className="CommonHeaderRight">
-        <button id="CommonButton" onClick={() => navigate('/program')}>Program</button>
-        <button id="CommonButton" onClick={() => navigate('/about')}>Om Biografen</button>
-        <button id="CommonButton" onClick={() => navigate('/login')}>Login</button>
-      </div>
-    </div>
+    <Navbar />
 
     <div className="ProgramContent">
-      <ul className="ProgramList">
-        {programList.map((slot) => (
-          <li className="ProgramItem" key={slot.tid}>
-            <h3>{slot.tid}</h3>
-            <ul>
-              {slot.movies.map((movie) => (
-                <li key={movie}>{movie}</li>
-              ))}
-            </ul>
-            <button id="CommonButton" onClick={() => navigate('/payment')}>Køb Billet</button>
-          </li>
-        ))}
-      </ul>
-    </div>
+      {moviesData.map((movie) => (
+    <div key={movie.movieId} className="MovieCard">
+    <h2>{movie.movieName}</h2>
+    <p>{movie.movieDuration} min</p>
+    <button className="CommonButton" onClick={() => navigate(`/payment/${movie.movieId}`)}>
+      Se film
+    </button>
+          <div>
+      </div>
+  </div>
+))}
+</div>
   </>
   )
 }

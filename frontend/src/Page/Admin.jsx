@@ -1,6 +1,7 @@
 import '../App.css'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import Navbar from '../Components/Navbar'
 
 export default function Admin() {
   const navigate = useNavigate()
@@ -32,22 +33,16 @@ export default function Admin() {
 
   return (
     <>
-      <div className="CommonHeaderBar">
-        <div className="CommonHeaderLeft">
-          <h1 id="CommonheaderText">Marius Bio</h1>
-        </div>
-        <div className="CommonHeaderRight">
-          <button id="CommonButton" onClick={() => navigate('/program')}>Program</button>
-          <button id="CommonButton" onClick={() => navigate('/about')}>Om Biografen</button>
-          <button id="CommonButton" onClick={() => navigate('/login')}>Login</button>
-        </div>
-      </div>
+      <Navbar />
       <div className="CommonContent">
         <button id="CommonButton" onClick={createAdminUser}>Opret admin</button>
         <input id="inputContent" type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
         <input id="inputContent" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
         <input id="inputContent" type="number" value={adminLevel} onChange={(e) => setAdminLevel(e.target.value)} placeholder="Admin Level" />
-        <p>{besked}</p>
+        <p>{username}</p>
+        <p>{password}</p>
+        <p>{adminLevel}</p>
+
       </div>
     </>
   )
