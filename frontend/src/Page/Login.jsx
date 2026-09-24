@@ -26,7 +26,6 @@ export default function Login() {
     } catch (err) {
       setBesked(`Fejl: ${err.message}`)
     }
-    setcreateUserState(!createUserState)
   }
 
   function handleClick() {

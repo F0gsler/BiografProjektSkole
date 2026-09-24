@@ -29,7 +29,7 @@ export default function Program() {
     <div key={movie.movieId} className="MovieCard">
     <h2>{movie.movieName}</h2>
     <p>{movie.movieDuration} min</p>
-    <button className="CommonButton" onClick={() => navigate(`/payment/${movie.movieId}`)}>
+    <button id="CommonButton" onClick={() => navigate(`/payment/${movie.movieId}`)}>
       Se film
     </button>
           <div>

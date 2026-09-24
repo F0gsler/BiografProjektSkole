@@ -21,8 +21,8 @@ export default function Navbar() {
         <button id="CommonButton" onClick={() => navigate('/about')}>Om Biografen</button>
         {bruger ? (
           <>
-            <span>Hej {bruger.username}</span>
             <button id="CommonButton" onClick={handleLogout}>Log ud</button>
+            <span>Hej {bruger.username}</span>
           </>
         ) : (
           <button id="CommonButton" onClick={() => navigate('/login')}>Login</button>
