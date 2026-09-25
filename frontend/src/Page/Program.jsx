@@ -23,7 +23,9 @@ export default function Program() {
   return (
     <>
     <Navbar />
-
+    <div className="HomeContent">
+      <p id="homeHeader">Dette er oversigten over film</p>
+      <p id="homeText">Alt godt fra gotteposen</p>
     <div className="ProgramContent">
       {moviesData.map((movie) => (
     <div key={movie.movieId} className="MovieCard">
@@ -35,7 +37,10 @@ export default function Program() {
           <div>
       </div>
   </div>
+  
 ))}
+    </div>
+
 </div>
   </>
   )

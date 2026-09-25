@@ -11,6 +11,12 @@ export default function Admin() {
   const [adminLevel, setAdminLevel] = useState('')
   const [movieName, setMovienName] = useState('')
   const [movieDuration, setMovieDuration] = useState('')
+  const [adminLoginUserName, setAdminLoginUserName] = useState('')
+  const [adminLoginPassword, setAdminLoginPassword] = useState('')
+
+
+  const adminUsername ="admin"
+  const adminPassword ="admin"
 
 
 
@@ -54,6 +60,17 @@ export default function Admin() {
   return (
     <>
       <Navbar />
+      {adminLoginUserName !== adminUsername || adminLoginPassword !== adminPassword &&
+      <>
+      <div className="CommonContent">
+        <h1>Admin Login</h1>
+        <input id="inputContent" type="text" value={adminLoginUserName} onChange={(e) => setAdminLoginUserName(e.target.value)} placeholder="Admin Username" />
+        <input id="inputContent" type="password" value={adminLoginPassword} onChange={(e) => setAdminLoginPassword(e.target.value)} placeholder="Admin Password" />
+      </div>
+      </>}
+
+      {adminLoginUserName === adminUsername && adminLoginPassword === adminPassword ?
+      <>
       <div className="CommonContent">
         <div>
           <button id="CommonButton" onClick={createAdminUser}>Opret admin</button>
@@ -72,9 +89,11 @@ export default function Admin() {
           <p>{movieDuration}</p>
         </div>
         <div>
-z 
         </div>
       </div>
+      </>
+      : null}
+
     </>
   )
 }
