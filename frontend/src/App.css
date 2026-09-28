@@ -109,7 +109,6 @@
 }
 
 .ProgramList {
-    display: flex;
     flex-direction: column;
     gap: 16px;
     list-style: none;
@@ -139,3 +138,18 @@
     margin-top: 50px;
     font-family: Rockwell Extra ,Rockwell , monospace; 
 }
+
+/* CSS for seats */
+
+.Seat { width: 32px; height: 32px; margin: 3px; }
+.Taken { background-color: grey; }
+.Selected { background-color: green; color: white; }
+.Seat:not(.Taken, .Selected):hover { background-color: #d3d5d6; }
+.Taken { cursor: not-allowed; }
+
+/* CSS for payment */
+
+.SelectedText { margin-top: 20px; }
+.Total { font-size: 20px; font-weight: bold; }
+.PaymentDone { color: green; font-weight: bold; }
+#CommonButton:disabled { opacity: 0.5; cursor: not-allowed; }

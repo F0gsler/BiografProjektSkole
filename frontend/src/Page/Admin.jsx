@@ -17,6 +17,8 @@ export default function Admin() {
 
   const adminUsername ="admin"
   const adminPassword ="admin"
+  const adminLoginPasswordLC = adminLoginPassword.toLocaleLowerCase()
+  const adminLoginUsernameLC = adminLoginUserName.toLocaleLowerCase()
 
 
 
@@ -60,16 +62,17 @@ export default function Admin() {
   return (
     <>
       <Navbar />
-      {adminLoginUserName !== adminUsername || adminLoginPassword !== adminPassword &&
+      {(adminLoginUsernameLC !== adminUsername || adminLoginPasswordLC !== adminPassword) &&
       <>
       <div className="CommonContent">
         <h1>Admin Login</h1>
         <input id="inputContent" type="text" value={adminLoginUserName} onChange={(e) => setAdminLoginUserName(e.target.value)} placeholder="Admin Username" />
         <input id="inputContent" type="password" value={adminLoginPassword} onChange={(e) => setAdminLoginPassword(e.target.value)} placeholder="Admin Password" />
       </div>
-      </>}
+      </>
+      }
 
-      {adminLoginUserName === adminUsername && adminLoginPassword === adminPassword ?
+      {(adminLoginUsernameLC === adminUsername && adminLoginPasswordLC === adminPassword) &&
       <>
       <div className="CommonContent">
         <div>
@@ -92,7 +95,7 @@ export default function Admin() {
         </div>
       </div>
       </>
-      : null}
+      }
 
     </>
   )

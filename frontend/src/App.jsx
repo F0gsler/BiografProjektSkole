@@ -15,7 +15,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="*" element={<Error />} />
       <Route path="/program" element={<Program />} />
-      <Route path="/payment" element={<RequireLogin><Payment /></RequireLogin>} />
+      <Route path="/payment/:movieId" element={<RequireLogin><Payment /></RequireLogin>} />
       <Route path="/about" element={<About />} />
       <Route path="/login" element={<Login />} />
       <Route path="/admin" element={<Admin />} />

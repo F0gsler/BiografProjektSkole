@@ -27,18 +27,17 @@ export default function Program() {
       <p id="homeHeader">Dette er oversigten over film</p>
       <p id="homeText">Alt godt fra gotteposen</p>
     <div className="ProgramContent">
-      {moviesData.map((movie) => (
-    <div key={movie.movieId} className="MovieCard">
-    <h2>{movie.movieName}</h2>
-    <p>{movie.movieDuration} min</p>
-    <button id="CommonButton" onClick={() => navigate(`/payment/${movie.movieId}`)}>
-      Se film
-    </button>
-          <div>
-      </div>
-  </div>
-  
-))}
+      <ul className="MovieList">
+        {moviesData.map((movie) => (
+          <li key={movie.movieId} className="MovieCard">
+            <h2>{movie.movieName}</h2>
+            <p>{movie.movieDuration} min</p>
+            <button id="CommonButton" onClick={() => navigate(`/payment/${movie.movieId}`)}>
+              Se film
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
 
 </div>
