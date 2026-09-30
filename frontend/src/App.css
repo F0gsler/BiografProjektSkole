@@ -1,158 +1,131 @@
-/* CSS for Header baren som bruges på alle sider  */
-
+/* Shared navigation */
 .CommonHeaderBar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 2px solid black;
-    margin-left: -5px;
-    padding: 10px 10px 0;
+    flex-wrap: wrap;
+    padding: 10px;
 }
 
 #CommonheaderText {
     font-size: 35px;
     color: black;
     margin: 0;
-    font-family: Rockwell Extra ,Rockwell , monospace; 
+    font-family: Rockwell Extra, Rockwell, monospace;
 }
 
 .CommonHeaderLeft {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    margin-left: 10px;
 }
 
 .CommonHeaderRight {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    margin-right: 10px;
+    flex-wrap: wrap;
 }
 
 #CommonButton {
-  background-color: #fafbfc;
-  border: 2px solid rgba(27, 31, 35, 0.15);
-  border-radius: 6px;
-  box-shadow: lightgrey;
-  box-sizing: border-box;
-  color: #24292e;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  list-style: none;
-  padding: 6px 16px;
-  position: relative;
-  touch-action: manipulation;
-  vertical-align: middle;
-  white-space: nowrap;
-  word-wrap: break-word;
-  margin-right: 10px;
-  margin-left: 10px;
-  margin-top: 6px;
-  font-weight: bold;
+    margin: 6px 10px 0;
+    padding: 6px 16px;
+    border: 1px solid rgba(27, 31, 35, 0.2);
+    border-radius: 6px;
+    background: #fafbfc;
+    color: #24292e;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 #CommonButton:hover {
-    background-color: #d3d5d6;
+    background: #d3d5d6;
 }
 
-
-/* CSS for Error page  */
-
+/* Page content */
 #errorHeader {
-    font-size: 50px;
-    color: black;
-    margin: 0;
-    font-family: Rockwell Extra ,Rockwell , monospace; 
+    margin: 0 0 50px;
+    font: 50px Rockwell Extra, Rockwell, monospace;
     text-align: center;
-    margin-top: 100px;
-    margin-bottom: 50px;
 }
+
 .ErrorPage {
+    margin-top: 100px;
     text-align: center;
-    margin-top: 50px;
-    font-family: Rockwell Extra ,Rockwell , monospace; 
-    justify-content: center;
 }
-
-
-/* CSS for home page  */
 
 .HomeContent {
-    text-align: center;
     margin-top: 100px;
-    font-family: Rockwell Extra ,Rockwell , monospace; 
+    font-family: Rockwell Extra, Rockwell, monospace;
+    text-align: center;
 }
 
-
-
-/* CSS for Input  */
-
-
 #inputContent {
-    padding: 10px;
     margin: 10px;
+    padding: 10px;
     border: 2px solid rgba(27, 31, 35, 0.15);
     border-radius: 6px;
     font-size: 16px;
     width: 200px;
-    font-family: Rockwell Extra ,Rockwell , monospace; 
+    font-family: Rockwell Extra, Rockwell, monospace;
 }
 
-/* CSS for program page  */
 .ProgramContent {
     margin-top: 100px;
-    font-family: Rockwell Extra ,Rockwell , monospace; 
+    font-family: Rockwell Extra, Rockwell, monospace;
 }
 
-.ProgramList {
-    flex-direction: column;
+.MovieList {
+    display: grid;
     gap: 16px;
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.ProgramItem {
-    border-bottom: 2px solid rgba(27, 31, 35, 0.15);
-    border-radius: 6px;
+.MovieCard {
+    border-bottom: 1px solid rgba(27, 31, 35, 0.2);
     padding: 16px;
-    width: fit-content;
 }
-
-.ProgramItem h3 {
-    margin: 0 0 8px;
-}
-
-.ProgramItem ul {
-    margin: 0;
-    padding-left: 20px;
-}
-
 
 .CommonContent {
-    text-align: center;
     margin-top: 50px;
-    font-family: Rockwell Extra ,Rockwell , monospace; 
+    font-family: Rockwell Extra, Rockwell, monospace;
+    text-align: center;
 }
 
-/* CSS for seats */
+/* About page */
+.AboutContent {
+    width: calc(100% - 48px);
+    max-width: 800px;
+    margin: 64px auto;
+    font-family: Rockwell Extra, Rockwell, monospace;
+}
 
+.AboutContent h1 {
+    margin: 0 0 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid rgba(27, 31, 35, 0.25);
+    text-align: center;
+}
+
+.AboutContent p {
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+/* Payment */
 .Seat { width: 32px; height: 32px; margin: 3px; }
-.Taken { background-color: grey; }
-.Selected { background-color: green; color: white; }
-.Seat:not(.Taken, .Selected):hover { background-color: #d3d5d6; }
-.Taken { cursor: not-allowed; }
-
-/* CSS for payment */
-
+.Seat:not(.Taken, .Selected):hover { background: #d3d5d6; }
+.Taken { cursor: not-allowed; background: grey; }
+.Selected { background: green; color: white; }
+.Time { width: 70px; height: 32px; margin: 3px; }
 .SelectedText { margin-top: 20px; }
 .Total { font-size: 20px; font-weight: bold; }
-.PaymentDone { color: green; font-weight: bold; }
 #CommonButton:disabled { opacity: 0.5; cursor: not-allowed; }
 
-
-.Time { width: 70px; height: 32px; margin: 3px; }
+@media (max-width: 600px) {
+    .AboutContent p { font-size: 16px; }
+    #errorHeader { font-size: 36px; }
+}

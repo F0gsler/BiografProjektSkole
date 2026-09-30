@@ -19,6 +19,7 @@ export default function Navbar() {
         <h1 id="CommonheaderText">Marius Bio</h1>
       </div>
       <div className="CommonHeaderRight">
+        <button id="CommonButton" onClick={() => navigate('/')}>Home</button>
         <button id="CommonButton" onClick={() => navigate('/program')}>Program</button>
         <button id="CommonButton" onClick={() => navigate('/about')}>Om Biografen</button>
         {bruger ? (
