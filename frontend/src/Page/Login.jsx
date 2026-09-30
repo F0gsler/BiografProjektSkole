@@ -2,11 +2,9 @@ import '../App.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../Components/Navbar'
-import { useAuth } from '../Components/AuthContext.jsx'
 
 export default function Login() {
   const navigate = useNavigate()
-  const { send } = useAuth()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
@@ -17,12 +15,23 @@ export default function Login() {
   // Samme funktion til login og opret - kun endpoint og data er forskellig
   async function handleSend() {
     if (!username || !password) return setBesked('Udfyld brugernavn og password')
+
+    const action = createUserState ? 'Register' : 'Login'
+    const data = createUserState
+      ? { username, password, email: email || null, age: Number(age) || 0 }
+      : { username, password }
+
     try {
-      const fejl = createUserState
-        ? await send('Register', { username, password, email: email || null, age: Number(age) || 0 })
-        : await send('Login', { username, password })
-      if (fejl) setBesked(fejl)
-      else navigate('/') // logget ind -> forsiden
+      const res = await fetch(`/api/Auth/${action}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      if (!res.ok) return setBesked((await res.text()) || 'Noget gik galt')
+
+      const bruger = await res.json() // { personId, username, email, age }
+      localStorage.setItem('bruger', JSON.stringify(bruger)) // husk hvem der er logget ind
+      navigate('/') // logget ind -> forsiden
     } catch (err) {
       setBesked(`Fejl: ${err.message}`)
     }
@@ -30,6 +39,7 @@ export default function Login() {
 
   function handleClick() {
     setcreateUserState(!createUserState)
+    setBesked('')
   }
 
   return (

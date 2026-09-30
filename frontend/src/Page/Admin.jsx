@@ -1,24 +1,26 @@
 import '../App.css'
-import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import Navbar from '../Components/Navbar'
 
 export default function Admin() {
-  const navigate = useNavigate()
   const [besked, setBesked] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [adminLevel, setAdminLevel] = useState('')
+
   const [movieName, setMovienName] = useState('')
   const [movieDuration, setMovieDuration] = useState('')
+
   const [adminLoginUserName, setAdminLoginUserName] = useState('')
   const [adminLoginPassword, setAdminLoginPassword] = useState('')
+
+  const [adminId, setAdminId] = useState('')
+  const [MovieId, setMovieId] = useState('')
+  const [movieNameEdit, setMovieNameEdit] = useState('')
 
 
   const adminUsername ="admin"
   const adminPassword ="admin"
-  const adminLoginPasswordLC = adminLoginPassword.toLocaleLowerCase()
-  const adminLoginUsernameLC = adminLoginUserName.toLocaleLowerCase()
 
 
 
@@ -41,7 +43,7 @@ export default function Admin() {
       setBesked(`Fejl: ${err.message}`)
     }
   }
-    const createMovie = async () => {
+  const createMovie = async () => {
     try {
       const res = await fetch(`/api/Movie/CreateMovie`, {
         method: 'POST',
@@ -59,10 +61,22 @@ export default function Admin() {
     }
   }
 
+  const deleteAdminUser = async () => {
+    try {
+      const res = await fetch(`/api/Admin/${adminId}`, {
+        method: 'DELETE',
+      })
+      const data = await res.json()
+      setBesked(`Slettet: ${data.username}`)
+    } catch (err) {
+      setBesked(`Fejl: ${err.message}`)
+    }
+  }
+
   return (
     <>
       <Navbar />
-      {(adminLoginUsernameLC !== adminUsername || adminLoginPasswordLC !== adminPassword) &&
+      {(adminLoginUserName !== adminUsername || adminLoginPassword !== adminPassword) &&
       <>
       <div className="CommonContent">
         <h1>Admin Login</h1>
@@ -72,7 +86,7 @@ export default function Admin() {
       </>
       }
 
-      {(adminLoginUsernameLC === adminUsername && adminLoginPasswordLC === adminPassword) &&
+      {(adminLoginUserName === adminUsername && adminLoginPassword === adminPassword) &&
       <>
       <div className="CommonContent">
         <div>
@@ -90,6 +104,11 @@ export default function Admin() {
           <input id="inputContent" type="number" value={movieDuration} onChange={(e) => setMovieDuration(e.target.value)} placeholder="Film længde" />
           <p>{movieName}</p>
           <p>{movieDuration}</p>
+        </div>
+        <div>
+          <button id="CommonButton" onClick={deleteAdminUser}>Delete Admin</button>
+          <input id="inputContent" type="text" value={adminId} onChange={(e) => setAdminId(e.target.value)} placeholder="Admin Id" />
+          <p>{adminId}</p>
         </div>
         <div>
         </div>

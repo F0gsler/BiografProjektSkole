@@ -4,13 +4,14 @@ import { useState, useEffect } from 'react'
 import Navbar from '../Components/Navbar'
 
 const PRICE = 100
-const TIME = '19:30'
+const TIMES = ['14:00', '17:00', '19:30', '21:45']
 const HALL = 'Sal 1'
 
 export default function Payment() {
   const { movieId } = useParams()
   const [movie, setMovie] = useState(null)
   const [receipt, setReceipt] = useState(null)
+  const [time, setTime] = useState(null)
 
   // 0 = free, 1 = taken, 2 = selected
   const [hall, setHall] = useState([
@@ -25,6 +26,11 @@ export default function Payment() {
       .then(response => response.json())
       .then(data => setMovie(data.find(m => m.movieId == movieId)))
   }, [movieId])
+
+  function handleTime(t) {
+    setTime(t)
+    setReceipt(null)
+  }
 
   function handleClick(r, c) {
     if (hall[r][c] === 1) return
@@ -45,7 +51,7 @@ export default function Payment() {
     setHall(newHall)
     setReceipt({
       movie: movie?.movieName,
-      time: TIME,
+      time: time,
       hall: HALL,
       seats: selected,
       total: selected.length * PRICE,
@@ -58,22 +64,34 @@ export default function Payment() {
       <div className="CommonContent">
         <h1>{movie?.movieName}</h1>
 
-        {hall.map((row, r) => (
-          <div key={r}>
-            {row.map((seat, c) => (
-              <button key={c} className={`Seat ${['', 'Taken', 'Selected'][seat]}`} onClick={() => handleClick(r, c)}>
-                {c + 1}
-              </button>
+        <div>
+          {TIMES.map(t => (
+            <button key={t} className={`Time ${t === time ? 'Selected' : ''}`} onClick={() => handleTime(t)}>
+              {t}
+            </button>
+          ))}
+        </div>
+
+        {time && (
+          <>
+            {hall.map((row, r) => (
+              <div key={r}>
+                {row.map((seat, c) => (
+                  <button key={c} className={`Seat ${['', 'Taken', 'Selected'][seat]}`} onClick={() => handleClick(r, c)}>
+                    {c + 1}
+                  </button>
+                ))}
+              </div>
             ))}
-          </div>
-        ))}
 
-        <p className="SelectedText">Selected: {selected.map(([r, c]) => `Row ${r + 1} Seat ${c + 1}`).join(', ')}</p>
-        <p className="Total">Total: {selected.length * PRICE} kr.</p>
+            <p className="SelectedText">Selected: {selected.map(([r, c]) => `Row ${r + 1} Seat ${c + 1}`).join(', ')}</p>
+            <p className="Total">Total: {selected.length * PRICE} kr.</p>
 
-        <button id="CommonButton" disabled={selected.length === 0} onClick={handlePayment}>
-          Pay
-        </button>
+            <button id="CommonButton" disabled={selected.length === 0} onClick={handlePayment}>
+              Pay
+            </button>
+          </>
+        )}
 
         {receipt && (
           <div className="Receipt">

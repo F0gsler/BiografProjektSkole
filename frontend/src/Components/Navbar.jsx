@@ -1,13 +1,15 @@
 import '../App.css'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from './AuthContext.jsx'
 
 export default function Navbar() {
   const navigate = useNavigate()
-  const { bruger, logout } = useAuth()
+
+  // Læs den gemte bruger (null hvis ingen er logget ind)
+  const bruger = JSON.parse(localStorage.getItem('bruger') || 'null')
 
   async function handleLogout() {
-    await logout()
+    await fetch('/api/Auth/Logout', { method: 'POST' }) // sletter login-cookien i backend
+    localStorage.removeItem('bruger')
     navigate('/')
   }
 
