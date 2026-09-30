@@ -72,6 +72,17 @@ export default function Admin() {
       setBesked(`Fejl: ${err.message}`)
     }
   }
+  const deleteMovie = async () => {
+    try {
+      const res = await fetch(`/api/Movie/${MovieId}`, {
+        method: 'DELETE',
+      })
+      const data = await res.json()
+      setBesked(`Slettet: ${data.username}`)
+    } catch (err) {
+      setBesked(`Fejl: ${err.message}`)
+    }
+  }
 
   return (
     <>
@@ -111,6 +122,9 @@ export default function Admin() {
           <p>{adminId}</p>
         </div>
         <div>
+          <button id="CommonButton" onClick={deleteMovie}>Delete Movie</button>
+          <input id="inputContent" type="text" value={MovieId} onChange={(e) => setMovieId(e.target.value)} placeholder="Movie Id" />
+          <p>{MovieId}</p>
         </div>
       </div>
       </>
