@@ -5,12 +5,15 @@ import Navbar from '../Components/Navbar'
 
 const PRICE = 100
 
+// 0 = ledig, 1 = optaget, 2 = valgt
 const START_SEATS = [
-  ['Free', 'Free', 'Taken', 'Free', 'Free'],
-  ['Free', 'Taken', 'Taken', 'Free', 'Free'],
-  ['Free', 'Free', 'Free', 'Free', 'Taken'],
-  ['Free', 'Free', 'Free', 'Free', 'Taken'],
+  [0, 0, 1, 0, 0],
+  [0, 1, 1, 0, 0],
+  [0, 0, 0, 0, 1],
+  [0, 0, 0, 0, 1],
 ]
+
+const SEAT_CLASS = ['', 'Taken', 'Selected']
 
 export default function Payment() {
   const { movieId } = useParams()
@@ -31,23 +34,28 @@ export default function Payment() {
 
   // Find alle valgte sæder
   const selected = []
-  seats.forEach((row, r) => {
-    row.forEach((seat, s) => {
-      if (seat === 'Selected') selected.push(`Row ${r + 1} Seat ${s + 1}`)
-    })
-  })
+  for (let r = 0; r < seats.length; r++) {
+    for (let s = 0; s < seats[r].length; s++) {
+      if (seats[r][s] === 2) {
+        selected.push(`Row ${r + 1} Seat ${s + 1}`)
+      }
+    }
+  }
 
-  // Skift et sæde mellem ledigt og valgt
+  // Skift et sæde mellem ledigt (0) og valgt (2)
   function toggleSeat(r, s) {
     const newSeats = seats.map(row => [...row])
-    newSeats[r][s] = seats[r][s] === 'Free' ? 'Selected' : 'Free'
+    newSeats[r][s] = seats[r][s] === 0 ? 2 : 0
     setSeats(newSeats)
   }
 
   // Gem kvittering og gør valgte sæder optagede
   function pay() {
-    setReceipt({ seats: selected.join(', '), total: selected.length * PRICE })
-    setSeats(seats.map(row => row.map(seat => seat === 'Selected' ? 'Taken' : seat)))
+    setReceipt({
+      seats: selected.join(', '),
+      total: selected.length * PRICE,
+    })
+    setSeats(seats.map(row => row.map(seat => seat === 2 ? 1 : seat)))
   }
 
   return (
@@ -56,18 +64,19 @@ export default function Payment() {
       <div className="CommonContent">
         <h1>{movie?.movieName}</h1>
 
-        <button onClick={() => setTime('14:00')}>14:00</button>
-        <button onClick={() => setTime('15:30')}>15:30</button>
-        <button onClick={() => setTime('18:30')}>18:15</button>
-        <button onClick={() => setTime('20:15')}>20:15</button>
+        {/* Tidspunkter */}
+        <button className={time === '14:00' ? 'Time Selected' : 'Time'} onClick={() => setTime('14:00')}>14:00</button>
+        <button className={time === '17:00' ? 'Time Selected' : 'Time'} onClick={() => setTime('17:00')}>17:00</button>
+        <button className={time === '19:30' ? 'Time Selected' : 'Time'} onClick={() => setTime('19:30')}>19:30</button>
+        <button className={time === '21:45' ? 'Time Selected' : 'Time'} onClick={() => setTime('21:45')}>21:45</button>
 
-
+        {/* Sædeplan og betaling */}
         {time && (
           <>
             {seats.map((row, r) => (
               <div key={r}>
                 {row.map((seat, s) => (
-                  <button key={s} className={`Seat ${seat}`} disabled={seat === 'Taken'} onClick={() => toggleSeat(r, s)}>
+                  <button key={s} className={`Seat ${SEAT_CLASS[seat]}`} disabled={seat === 1} onClick={() => toggleSeat(r, s)}>
                     {s + 1}
                   </button>
                 ))}
@@ -80,6 +89,7 @@ export default function Payment() {
           </>
         )}
 
+        {/* Kvittering */}
         {receipt && (
           <div className="Receipt">
             <h2>Receipt</h2>
