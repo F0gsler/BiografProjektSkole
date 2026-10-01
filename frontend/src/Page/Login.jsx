@@ -12,14 +12,8 @@ export default function Login() {
   const [createUserState, setcreateUserState] = useState(false)
   const [besked, setBesked] = useState('')
 
-  // Samme funktion til login og opret - kun endpoint og data er forskellig
   async function handleSend() {
     if (!username || !password) return setBesked('Udfyld brugernavn og password')
-
-    const action = createUserState ? 'Register' : 'Login'
-    const data = createUserState
-      ? { username, password, email: email || null, age: Number(age) || 0 }
-      : { username, password }
 
     try {
       const res = await fetch(`/api/Login/${action}`, {
