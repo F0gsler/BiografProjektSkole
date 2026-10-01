@@ -3,6 +3,16 @@ import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Navbar from '../Components/Navbar'
 
+useEffect(() => {
+    const getData = async () => {
+      const response = await fetch('/api/Movie/GetAllMovies')
+      const data = await response.json()
+      setMovie(Array.isArray(data) ? data.find(item => item.movieId == movieId) : null)
+    }
+
+    getData()
+  }, [movieId])
+
 const PRICE = 100
 
 // 0 = ledig, 1 = optaget, 2 = valgt
@@ -12,7 +22,6 @@ const START_SEATS = [
   [0, 0, 0, 0, 1],
   [0, 0, 0, 0, 1],
 ]
-
 const SEAT_CLASS = ['', 'Taken', 'Selected']
 
 export default function Payment() {
@@ -22,15 +31,6 @@ export default function Payment() {
   const [seats, setSeats] = useState(START_SEATS)
   const [receipt, setReceipt] = useState(null)
 
-  useEffect(() => {
-    const getData = async () => {
-      const response = await fetch('/api/Movie/GetAllMovies')
-      const data = await response.json()
-      setMovie(Array.isArray(data) ? data.find(item => item.movieId == movieId) : null)
-    }
-
-    getData()
-  }, [movieId])
 
   // Find alle valgte sæder
   const selected = []
